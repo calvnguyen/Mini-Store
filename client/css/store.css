@@ -86,6 +86,27 @@
 	margin-top: 20px;
 }
 
+#top-section{
+	border-bottom: 2px solid black;
+	width: auto;
+	height: 40px;
+	margin-bottom: 20px;
+
+}
+
+#login-container{
+	border: 1px solid black;
+	margin: 0px auto;
+	height: auto;
+	width: 440px;
+	padding-top: 30px;
+	background-color: white;
+	color: black;
+	font-family: verdana, arial, sans-serif;
+	border-radius: 12px;
+	padding-bottom: 20px;
+}
+
 #form-container{
 	margin: 0px auto;
 	height: 300px;
@@ -165,6 +186,16 @@
 	display: inline-block;
 }
 
+#login-text{
+	font-family: verdana, arial, sans-serif;
+	font-weight: bold;
+	font-size: 14pt;
+	color: #0085B2;
+}
+#user-text{
+	color: #570810;
+}
+
 .form-label{
 	display: block;
 	margin-top: 5px;
@@ -188,6 +219,17 @@
 	font-size: 14pt;
 }
 
+#header-login-text{
+	font-weight: bold;
+	font-family: verdana, arial, sans-serif;
+	color: #0D4F8B;
+	margin-left: 20px;
+	font-size: 15pt;
+	text-align: left;
+	margin-top: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
 
 .name-text{
 	font-family: verdana, arial, sans-serif;

@@ -1,12 +1,23 @@
 
 
-myApp.controller('DashController', ['$scope', 'productsFactory', 'ordersFactory', 'customersFactory', '$location', function($scope, productsFactory, ordersFactory, customersFactory, $location) {
+myApp.controller('DashController', ['$scope', 'productsFactory', 'ordersFactory', 'customersFactory', 'usersFactory', '$location', function($scope, productsFactory, ordersFactory, customersFactory, usersFactory, $location) {
 /* Private Methods */
   $scope.products = [];
   $scope.orders = [];
   $scope.customers = [];
   $scope.recent_customers = [];
   $scope.recent_orders = [];
+
+  $scope.user = "";
+
+  var userIndex = function() {
+      usersFactory.index(function (data) {
+        $scope.user = data;
+        console.log("login user controller:");
+        console.log(data);
+    }); 
+  }
+
 
   var productsIndex = function() {
       productsFactory.index(function (data) {
@@ -32,6 +43,7 @@ myApp.controller('DashController', ['$scope', 'productsFactory', 'ordersFactory'
     })
   }
 
+  userIndex();
   productsIndex();
   recentOrders();
   recentCustomers();
@@ -158,10 +170,23 @@ myApp.controller('OrdersController', ['$scope', 'ordersFactory', 'customersFacto
   
 }]);
 
-myApp.controller('ProductsController', ['$scope', 'productsFactory', function($scope, productsFactory) {
+myApp.controller('ProductsController', ['$scope', 'productsFactory', 'usersFactory', function($scope, productsFactory, usersFactory) {
 
   $scope.products = [];
   $scope.product = {};
+
+    $scope.user = "";
+
+  var userIndex = function() {
+      usersFactory.index(function (data) {
+        $scope.user = data;
+        console.log("login user controller:");
+        console.log(data);
+    }); 
+  }
+
+  userIndex();
+
 
   var productsIndex = function() {
       productsFactory.index(function (data) {
@@ -170,6 +195,8 @@ myApp.controller('ProductsController', ['$scope', 'productsFactory', function($s
       console.log(data);
     }); 
   }
+
+
 
   $scope.addProduct = function(){
     console.log($scope.newProduct);
@@ -201,3 +228,27 @@ myApp.controller('ProductsController', ['$scope', 'productsFactory', function($s
   
 }]);
 
+myApp.controller('LoginController', ['$scope', 'usersFactory', '$location', '$routeParams', function($scope, usersFactory, $location, $routeParams) {
+/* Private Methods */
+  $scope.user = "";
+
+  var userIndex = function() {
+      usersFactory.index(function (data) {
+        $scope.user = data;
+        console.log("login user controller:");
+        console.log(data);
+    }); 
+  }
+
+  $scope.assignUser = function() {
+    usersFactory.assign($scope.newuser, function(data){
+      $scope.user = data;
+      console.log("login back from factory");
+      console.log(data);
+      $scope.newuser = "";
+      $location.url('/dash');
+    })
+  }
+
+
+}]);

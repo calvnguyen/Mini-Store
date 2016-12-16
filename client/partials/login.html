@@ -1,0 +1,18 @@
+<div id="top-section">
+      <h1 id="header-login-text">Login - MEAN Black Belt</h1>
+    </div>
+    <div id="login-container">
+       <div style="margin-bottom: 10px;margin-left: 20px" ng-messages="loginForm.username.$error">
+        <p style="color: red" ng-message="minlength">Name is too short.</p>
+        <p style="color: red" ng-message="required">Name is required.</p>
+      </div> 
+      <form name="loginForm" ng-submit="assignUser()" id="registration-form">
+
+        <label class="form-label">
+          Username: <input id="name-text" type="text" name="username" ng-model="newuser" placeholder="enter your name" required minlength="2">
+        </label>
+
+        <input class="btn btn-success" type="submit" value="Submit">
+ 
+      </form>
+</div>

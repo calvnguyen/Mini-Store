@@ -1,3 +1,30 @@
+// Users Factory
+myApp.factory('usersFactory', ['$http', function($http) {
+
+  var user = "";
+
+  function UsersFactory(){
+
+    this.index = function(callback){
+        callback(user);
+    };
+
+
+    this.assign = function(newuser, callback){
+      
+        if (typeof(callback) == 'function'){
+          user = newuser;
+          callback(user);
+        }
+
+    };
+   
+  }
+
+  return new UsersFactory();
+
+}]);
+
 // Customers Factory
 myApp.factory('customersFactory', ['$http', function($http) {
 	var customers = [];

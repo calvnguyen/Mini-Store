@@ -4,9 +4,17 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngMessages', 'angularMoment', '
     //  use the config method to set up routing:
     myApp.config(function ($routeProvider) {
     $routeProvider
-    .when('/',{
+    .when('/dash',{
         templateUrl: 'partials/dashboard.html',
         controller: 'DashController'
+    })
+    .when('/main_nav',{
+        templateUrl: 'partials/main_nav.html',
+        controller: 'DashController'
+    })
+    .when('/',{
+        templateUrl: 'partials/login.html',
+        controller: 'LoginController'
     })
     .when('/orders',{
         templateUrl: 'partials/orders.html',
