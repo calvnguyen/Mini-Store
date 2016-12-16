@@ -1,0 +1,44 @@
+
+  <div id="form-container">
+
+    <div style="margin-bottom: 10px" ng-messages="customerForm.name.$error">
+        <p style="color: red" ng-message="minlength">Name is too short.</p>
+        <p style="color: red" ng-message="required">Name is required.</p>
+    </div> 
+     
+    <p class="underline-text">Add a new customer</p>
+    <form name='customerForm' ng-submit="addCustomer()" id="user-form">
+      <p style="color: red; margin-left: 20px" ng-if="error">{{error}}</p>
+      <label class="form-label">
+        Customer Name: <input name="name" class="name-text" type="text" ng-model="newCust.name" placeholder="enter name" ng-minlength='1' required>
+      </label>
+      <input class="btn btn-primary" type="submit" value="Add New">
+    </form>
+
+    <input class="filter-box2" type="text" ng-model="search" placeholder="search name...">
+ 
+
+    <table id="customers-table">
+    <thead>
+      <tr>
+        <th class="table-heading">
+        <a href="#!/customers" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+        Customer Name <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">
+        <a href="#!/customers" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+        Created Date <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="customer in customers | filter:{name: search} | orderBy:sortType:sortReverse">
+        <td class="table-data">{{ customer.name }}</td>
+        <td class="table-data">{{ customer.createdAt | date: "MMMM dd yyyy" }}</td>
+        <td class="table-data"><button class="btn btn-danger" ng-click="deleteCustomer(customer._id)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>

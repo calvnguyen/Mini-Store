@@ -1,0 +1,46 @@
+
+
+<div id="filter-nav">
+  <input id="filter-box" type="text" ng-model="search" placeholder="search product...">
+</div>
+
+<div class="container" id="dash-box">
+
+ 	<div class="row">
+	    <div class="prod-box" class="col-md-2 col-sm-2" ng-repeat="product in products | filter:{name: search} as results" ng-show='$index < 6'>
+	    	
+	    	<div>
+	    		<img ng-src="{{product.image_url}}" img ng-show="product.image_url !== undefined" alt="Image of product.." class="thumb-nail">
+	    	</div>
+	    	<div class="prod-text">
+	    		<p>{{ product.name }}</p>
+	    		<p>(<span style="color: blue; font-weight: bold">{{product.quantity}}</span> left)</p>
+	   		</div>
+	    </div>
+	</div>
+
+
+     <strong style="color: red; margin-left: 50px" ng-if="results.length === 0 ">No results found...</strong>
+ 
+
+	<a href="#!/products"><p class="show-text">show more...</p></a>
+	<div>
+    	<p class="underline-text">Recent Orders</p>
+    	<ul style="list-style: none">
+    		<li class="dash-bullet" ng-repeat = "recent_order in recent_orders">{{ recent_order._customer[0].name }} purchased {{ recent_order.quantity }} {{ recent_order._product[0].name }} ...(<span style="color:#EE7600">{{ recent_order.createdAt | timeAgo }}</span>)</li>
+
+    	</ul>
+    </div>
+    <a href="#!/orders"><p class="show-text">show all orders...</p></a> 
+
+    <div>
+    	<p class="underline-text">New Customers</p>
+    	<ul style="list-style: none">
+    		<li class="dash-bullet" ng-repeat = "recent_customer in recent_customers">{{ recent_customer.name }} joined the store (<span style="color:#EE7600">{{ recent_customer.createdAt | timeAgo }}</span>)</li>
+    	</ul>
+    </div>
+
+    <a href="#!/customers"><p class="show-text">show all customers...</p></a>
+
+</div>
+ 

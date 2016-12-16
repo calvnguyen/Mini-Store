@@ -1,0 +1,76 @@
+
+  <div id="form-container">
+
+    <div ng-messages="orderForm.customer.$error">
+        <p style="color: red" ng-message="required">Customer Name is required.</p>
+    </div> 
+     <div ng-messages="orderForm.product.$error">
+        <p style="color: red" ng-message="required">Product is required.</p>
+    </div> 
+         <div ng-messages="orderForm.qty.$error">
+        <p style="color: red" ng-message="required">Order Quantity is required.</p>
+    </div> 
+    <p class="underline-text">Add a new order:</p>
+    <form name='orderForm' ng-submit="addOrder()" user-form">
+      <label class="form-label">
+        Customer Name:
+        <select ng-model="newOrder._customer" name="customer" required>
+        <option class="option-text" ng-repeat="customer in customers" value="{{customer._id}}">{{customer.name}}</option>
+      </select>
+      </label>
+
+      <label class="form-label">
+        Order Quantity: <input name="qty" class="qty-text" type="text" ng-model="newOrder.quantity" placeholder="enter qty" ng-minlength='1' required>
+      </label>
+
+      <label class="form-label">
+        Product:
+        <select id="option-box" ng-model="newOrder._product" name="product" required>
+        <option class="option-text" ng-repeat="product in products" value="{{product._id}}">{{product.name}}</option>
+      </select>
+
+      </label>
+      <input class="btn btn-primary" type="submit" value="Add New">
+    </form>
+
+    <input class="filter-box2" type="text" ng-model="search" placeholder="search name...">
+
+    <table id="orders-table">
+    <thead>
+      <tr>
+        <th class="table-heading">
+        <a href="#!/orders" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+        Customer Name <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">
+        <a href="#!/orders" ng-click="sortType = 'product'; sortReverse = !sortReverse">
+        Product <span ng-show="sortType == 'product' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'product' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">
+        <a href="#!/orders" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+        Description <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">
+        <a href="#!/orders" ng-click="sortType = 'quantity'; sortReverse = !sortReverse">
+        Quantity <span ng-show="sortType == 'quantity' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'quantity' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">
+        <a href="#!/orders" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+        Date <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        <th class="table-heading">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders | filter:{name: search} | orderBy:sortType:sortReverse">
+        <td class="table-data">{{ order._customer[0].name }}</td>
+        <td class="table-data">{{ order._product[0].name }}</td>
+        <td class="table-data">{{ order._product[0].description }}</td>
+        <td class="table-data" style="text-align: center">{{ order.quantity }}</td>
+        <td id="table-data2">{{ order.createdAt | date: "MMMM dd yyyy" }}</td>
+        <td class="table-data"><button class="btn btn-danger" ng-click="deleteOrder(order._id, order._product[0]._id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
