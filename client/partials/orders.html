@@ -33,7 +33,7 @@
       <input class="btn btn-primary" type="submit" value="Add New">
     </form>
 
-    <input class="filter-box2" type="text" ng-model="search" placeholder="search name...">
+    <input class="filter-box2" type="text" ng-model="search" placeholder="search anything...">
 
     <table id="orders-table">
     <thead>
@@ -62,7 +62,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="order in orders | filter:{name: search} | orderBy:sortType:sortReverse">
+      <tr ng-repeat="order in orders | filter: search | orderBy:sortType:sortReverse">
         <td class="table-data">{{ order._customer[0].name }}</td>
         <td class="table-data">{{ order._product[0].name }}</td>
         <td class="table-data">{{ order._product[0].description }}</td>
